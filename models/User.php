@@ -1,5 +1,5 @@
 <?php
-    require_once '../../config/Database.php';
+    require_once '../config/Database.php';
 
     class User{
         public $database;
@@ -21,8 +21,17 @@
 
         public function findUserByNameOrMail($table, $email, $password)
         {
-            $this->database->query("SELECT * FROM USE {$table} WHERE email = $email and password = $password");
-            
+            $this->database->query("SELECT * FROM {$table} WHERE email = $email and password = $password");
+            $row = $this->database->singleAll();
+
+            if($this->database->rowCount() > 0)
+            {
+                return $row;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 

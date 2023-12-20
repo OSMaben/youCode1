@@ -1,5 +1,6 @@
 <?php
-include '../../models/User.php';
+    require_once '../models/User.php';
+
 class Users
 {
 
@@ -21,32 +22,43 @@ class Users
             'repeatPass' => trim($_POST['passwordConfirmation'])
         ];
 
-        if(empty($data['lastname']) || empty($data['email']) || empty($data['Password'])|| empty($data['repeatPass']))
-        {
-            $this->erroMessage = "the inputs should not be empty";
-            header("location: ../views/auth/register.php");
-        }
+        // if(empty($data['lastname']) || empty($data['email']) || empty($data['Password'])|| empty($data['repeatPass']))
+        // {
+        //     $this->erroMessage = "the inputs should not be empty";
+        //     header("location: .../register.php");
+        // // // }
         
-        if(!filter_var($data['email'], FILTER_SANITIZE_EMAIL))
+        // // if(!filter_var($data['email'], FILTER_SANITIZE_EMAIL))
+        // // {
+        // //     $this->erroMessage = "email is not valid";
+        // //     header("location: ../register.php");
+        // // }
+        
+        // if(strlen(empty($data['Password'])) < 6 )
+        // {
+        //     $this->erroMessage = "password must be more then 8 chars";
+        //     header("location: ../register.php");
+        // }
+
+        if($this->userModel->findUserByNameOrMail("users",$data['email'],$data['Password']))
         {
-            $this->erroMessage = "email is not valid";
-            header("location: ../views/auth/register.php");
+            $this->erroMessage = "password or mail is already taken";
+            header("location: ../register.php");
         }
-        if(strlen(empty($data['Password'])) < 6 )
-        {
-            $this->erroMessage = "password must be more then 8 chars";
-            header("location: ../views/auth/register.php");
-        }
-       
+
         if($data['Password'] !== $data['repeatPass'])
         {
             $this->erroMessage = "Passwords are not the same";
-            header("location: ../views/auth/register.php");
+            header("location: ../register.php");
         }
-        else
+        
+        if($this->userModel->RegisterUser("users",array("firstName","lastname","email","Password"),
+        array($data['firstName'],$data['lastname'],$data['email'],$data['Password'])))
         {
-            $this->userModel->RegisterUser("users",array("firstName","lastname","email","Password"),
-            array($data['firstName'],$data['lastname'],$data['email'],$data['Password']));
+            header("location: ../login.php");
+        }else
+        {
+            die("something went wrong");
         }
 
     }

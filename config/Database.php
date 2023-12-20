@@ -11,9 +11,9 @@
             {
                 $this->connect = new PDO("mysql:host={$db_host};dbname={$db_name}",$db_user,$db_pass);
 
-            }catch(PDOException $ohomo)
+            }catch(PDOException $e)
             {
-                echo "connection failed:". $ohomo->getMessage();
+                echo "connection failed:". $e->getMessage();
             }
         }
 
@@ -33,8 +33,23 @@
         public function singleFetch()
         {
             $this->excute();//excute the query after 
-            return $this->
+            return $this->stml->fetch();
         }
+
+        public function singleAll()
+        {
+            $this->excute();//excute the query after 
+            return $this->stml->fetchAll();
+        }
+
+        //this method to cound the number of rows
+
+        public function rowCount()
+        {
+            return $this->stml->rowCount();
+        }
+
+         
     }
 
 ?>

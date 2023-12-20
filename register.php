@@ -1,9 +1,5 @@
 <?php
-
-require_once '../../controllers/users.php';
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +11,10 @@ require_once '../../controllers/users.php';
     <title>Document</title>
 </head>
 <body>
-    <!-- Navbar-->
 
     <?php
-    include '../header.php';
-?>
+        include './views/header.php';
+    ?>
 
 <div class="container my-5">
     <div class="row py-5 mt-4 align-items-center">
@@ -27,26 +22,16 @@ require_once '../../controllers/users.php';
         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
             <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
             <h1>Create an Account</h1>
-          
         </div>
 
         <!-- Registeration Form -->
         <div class="col-md-7 col-lg-6 ml-auto">
-            <?php
-            $initi = new Users;
-            if(!empty($errorMessage))
-            {
-                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                    <strong>$errorMessage</strong>
-                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-lable='Close'></button>
-                </div>";
-            }
-            ?>
+           
 
 
-            <form method="post" action="../../controllers/users.php" >
+            <form method="post" action="./controllers/users.php" >
                 <div class="row">
-
+            
                    <input type="hidden" name="type" value="register">
                     <div class="input-group col-lg-6 mb-4">
                         <div class="input-group-prepend">
@@ -82,14 +67,12 @@ require_once '../../controllers/users.php';
                         <div class="input-group-prepend">
                             
                         </div>
-                        <input id="passwordConfirmation" type="text" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
+                        <input id="passwordConfirmation" type="password" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <a href="#" class="btn btn-primary btn-block py-2">
-                            <span class="font-weight-bold">Create your account</span>
-                        </a>
+                        <button class="btn btn-primary btn-block py-2">Create An Account</button>
                     </div>
 
                     <!-- Divider Text -->
