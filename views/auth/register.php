@@ -52,7 +52,8 @@ require_once '../../controllers/users.php';
                         <div class="input-group-prepend">
                             
                         </div>
-                        <input id="full name" type="text" name="fullname" placeholder="Full Name" class="form-control bg-white border-left-0 border-md">
+                        <input id="first name" type="text" name="firstname" placeholder="first Name" class="form-control bg-white border-left-0 border-md">
+                        <input id="last name" type="text" name="lastname" placeholder="last Name" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Email Address -->
