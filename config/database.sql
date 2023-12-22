@@ -35,3 +35,7 @@ CREATE TABLE userAuth(
     FOREIGN KEY (id_user) references users (id_user)
 
 );
+-- Assuming your table is named 'roles'
+INSERT INTO roles (id_role, role_type) VALUES (1, 'student');
+INSERT INTO roles (id_role, role_type) VALUES (2, 'teacher');
+INSERT INTO roles (id_role, role_type) VALUES (3, 'admin');

@@ -1,5 +1,5 @@
 <?php
-    require_once '../models/User.php';
+    require_once 'models/User.php';
 
 class Users
 {
@@ -7,6 +7,7 @@ class Users
     private $userModel;
     private $validateDate;
     public $erroMessage;
+
     public function __construct()
     {
         $this->userModel = new User;
@@ -15,71 +16,113 @@ class Users
     public function register()
     {
         $data = [
-            'firstname' => trim($_POST['lastname']),
+            'firstname' => trim($_POST['firstname']), // Fix the typo here
             'lastname' => trim($_POST['lastname']),
             'email' => trim($_POST['email']),
-            'Password' => trim($_POST['Password']),
+            'Password' => trim($_POST['password']),
             'repeatPass' => trim($_POST['passwordConfirmation'])
         ];
 
-        // if(empty($data['lastname']) || empty($data['email']) || empty($data['Password'])|| empty($data['repeatPass']))
-        // {
-        //     $this->erroMessage = "the inputs should not be empty";
-        //     header("location: .../register.php");
-        // // // }
-        
-        // // if(!filter_var($data['email'], FILTER_SANITIZE_EMAIL))
-        // // {
-        // //     $this->erroMessage = "email is not valid";
-        // //     header("location: ../register.php");
-        // // }
-        
-        // if(strlen(empty($data['Password'])) < 6 )
-        // {
-        //     $this->erroMessage = "password must be more then 8 chars";
-        //     header("location: ../register.php");
-        // }
-
-        if($this->userModel->findUserByNameOrMail("users",$data['email'],$data['Password']))
-        {
-            $this->erroMessage = "password or mail is already taken";
-            header("location: ../register.php");
+        // Check for empty fields first
+        if (empty($data['firstname']) || empty($data['lastname']) || empty($data['email']) || empty($data['Password']) || empty($data['repeatPass'])) {
+            header("location: index.php?error=empty");
+            exit();
         }
 
-        if($data['Password'] !== $data['repeatPass'])
-        {
-            $this->erroMessage = "Passwords are not the same";
-            header("location: ../register.php");
-        }
-        
-        if($this->userModel->RegisterUser("users",array("firstName","lastname","email","Password"),
-        array($data['firstName'],$data['lastname'],$data['email'],$data['Password'])))
-        {
-            header("location: ../login.php");
-        }else
-        {
-            die("something went wrong");
+        // Check email format
+        if (!filter_var($data['email'], FILTER_SANITIZE_EMAIL)) {
+            header("location: index.php?error=notvalid");
+            exit();
         }
 
+        // Check password length
+        if (strlen($data['Password']) < 6) {
+            header("location: index.php?error=password_length");
+            exit();
+        }
+
+        // Check password match
+        if ($data['Password'] !== $data['repeatPass']) {
+            header("location: index.php?error=password_match");
+            exit();
+        }
+
+        // Now attempt to register the user
+        if ($this->userModel->RegisterUser("users", array("firstName", "lastname", "email", "Password"), array($data['firstname'], $data['lastname'], $data['email'], $data['Password']))) {
+            header("location: index.php?action=login");
+            exit();
+        } else {
+            header("location: index.php?error=registration_failed");
+            exit();
+        }
     }
 
 
-    
+    public function login()
+        {
+            $data = [
+                'email' => trim($_POST['email']),
+                'Password' => trim($_POST['password']),
+            ];
+
+            if(empty($data['email']) || empty($data['Password']))
+            {
+               //you have to handel if empty
+                header("location: index.php?error=empty");
+                exit();
+            }
+            if (!filter_var($data['email'], FILTER_SANITIZE_EMAIL)) {
+                header("location: index.php?error=notvalid");
+                exit();
+            }
+
+            // Check password length
+            if (strlen($data['Password']) < 6) {
+                header("location: index.php?error=password_length");
+                exit();
+            }
+            else
+            {
+                $user = $this->userModel->loginUser($data['email'],$data['Password']);
+                if($user)//if the login function returned a data
+                {
+                    $_SESSION['id_user'] = $user['id_user'];
+                    header("location: index.php?action=dashboard");
+                    exit();
+                }
+                else {
+                    header("location: index.php?error=notvalid");
+                    exit();
+                }
+            }
+
+        }
+
+        public function showUser()
+        {
+           $users =  $this->userModel->getUsers();
+            include 'views/listOfStudents.php';
+        }
+
 }
 
-$init = new Users;
+    $init = new Users;
+    //bax nchofo eax user sift data b post
 
-//bax nchofo eax user sift data b post
-
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    switch($_POST['type'])
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        case 'register':
-            $init->register();
-            break;
+        switch($_POST['type'])
+        {
+            case 'register':
+                $init->register();
+                break;
+            case 'login':
+                $init->login();
+                break;
+            default:
+                header("location: index.php");
+        }
     }
-}
 
 
 ?>

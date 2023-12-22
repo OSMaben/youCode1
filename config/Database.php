@@ -17,11 +17,13 @@
             }
         }
 
-
         //function to prepare queries
         public function query($sql)
         {
             $this->stml = $this->connect->prepare($sql);
+        }
+        public function prepare($sql) {
+            return $this->connect->prepare($sql);
         }
 
         //excute a query
@@ -49,7 +51,8 @@
             return $this->stml->rowCount();
         }
 
-         
+       
+
     }
 
 ?>
