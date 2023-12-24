@@ -26,7 +26,7 @@
                             <input type="hidden" name="type" value="login">
                             <div class="form-group">
                                 <label>Your email</label>
-                                <input name="email" class="form-control" placeholder="Email" type="email">
+                                <input name="email" name="email" class="form-control" placeholder="Email" type="email">
                             </div> <!-- form-group// -->
                             
                             <div class="form-group">

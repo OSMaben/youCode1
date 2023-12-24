@@ -6,28 +6,28 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../assets/cssbootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/feather.css">
-    <link rel="stylesheet" href="../assets/css/flags.css">
-    <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="../assets/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/cssbootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/feather.css">
+    <link rel="stylesheet" href="assets/css/flags.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
 </head>
 <body>
 <?php
 include 'aside.php';
 ?>
-
+    <h1 style="text-align:center;">Welcome <?= $_SESSION['firstName']?></h1>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
-<script src="../assets/js/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/feather.min.js"></script>
-<script src="../assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../assets/js/plugins/apexchart/apexcharts.min.js"></script>
-<script src="../assets/js/plugins/apexchart/chart-data.js"></script>
-<script src="../assets/js/script.js"></script>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/feather.min.js"></script>
+<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/js/plugins/apexchart/apexcharts.min.js"></script>
+<script src="assets/js/plugins/apexchart/chart-data.js"></script>
+<script src="assets/js/script.js"></script>
 
 
 </body>

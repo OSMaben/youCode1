@@ -1,11 +1,3 @@
-<?php
-
-require_once 'controllers/users.php';
-$users = new Users;
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,7 +71,7 @@ $users = new Users;
                                         </div>
                                         <div class="col-auto text-end float-end ms-auto download-grp">
 
-                                            <a href="add-student.html" class="btn btn-primary"><i
+                                            <a href="index.php?action=add-student" class="btn btn-primary"><i
                                                     class="fas fa-plus"></i></a>
                                         </div>
                                     </div>
@@ -107,6 +99,7 @@ $users = new Users;
                                         </thead>
                                         <tbody>
                                           <?php
+
                                             foreach($users as $user)
                                             {
                                                 echo "
@@ -134,11 +127,11 @@ $users = new Users;
                                                 <td>$user[address]</td>
                                                 <td class='text-end'>
                                                     <div class='actions '>
-                                                        <a href='javascript:;'
+                                                        <a href='index.php?action=deleteStudent&id=$user[id_user]'
                                                             class='btn btn-sm bg-danger me-2 '>
                                                             <i class='fa-regular fa-trash-can text-white'></i>
                                                         </a>
-                                                        <a href='edit-student.html' class='btn btn-sm bg-success '>
+                                                        <a href='index.php?action=edit-student&id=$user[id_user]' class='btn btn-sm bg-success '>
                                                             <i class='fa-solid fa-pencil text-white'></i>
                                                         </a>
                                                     </div>
@@ -147,7 +140,7 @@ $users = new Users;
                                                 ";
                                             }
                                           ?>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -171,6 +164,7 @@ $users = new Users;
     <script src="assets/js/plugins/apexchart/apexcharts.min.js"></script>
     <script src="assets/js/plugins/apexchart/chart-data.js"></script>
     <script src="assets/js/script.js"></script>
+
 </body>
 
 </html>

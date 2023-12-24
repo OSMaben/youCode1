@@ -47,13 +47,64 @@
             }
         }
 
-        public function getUsers()
+        public function getUsers($id)
         {
-           $stml = $this->database->prepare("SELECT * FROM users");
+            $stml = $this->database->prepare("SELECT * FROM users WHERE id_role = $id");
             $stml->execute();
-            $user = $stml->fetchALL(PDO::FETCH_ASSOC);
+            $user = $stml->fetchAll(PDO::FETCH_ASSOC);  // Fetch as associative array
+            if($user)
+            {
+                return $user;
+            }
+            else
+                return false;
+        }
+
+        public function getSingleUser($id)
+        {
+            $stml = $this->database->prepare("SELECT * FROM users WHERE id_user = $id");
+            $stml->execute();
+            $user = $stml->fetch(PDO::FETCH_ASSOC);  // Fetch as associative array
+            if($user)
+            {
+                return $user;
+            }
+            else
+                return false;
+        }
+
+        public function suppremeUser($table, $id)
+        {
+                $stml = $this->database->prepare("DELETE FROM $table WHERE id_user = $id");
+                $result = $stml->execute();
+                return $result;
+        }
+
+        public function insert($table, $columns,$values)
+        {
+            $columns = implode(",",$columns);
+            $values = implode("','",$values);
+            $stml = $this->database->prepare("INSERT INTO {$table} ({$columns}) VALUES ('{$values}')");
+            $stml->execute();
+            return $stml;
+        }
+
+        public function update($table, $key, $value, $id) {
+            $updateData = '';
+
+            for($i = 0; $i < count($key); $i++)
+            {
+                $updateData .= "{$key[$i]} = '{$value[$i]}'";
+                if($i < count($key) - 1)
+                {
+                    $updateData .= ",";
+                }
+            }
+            $stml = $this->database->prepare("UPDATE {$table} SET $updateData WHERE id_user = $id");
+            $user = $stml->execute();
             return $user;
         }
+
     }
 
 ?>

@@ -1,10 +1,10 @@
 <div class="header">
 
     <div class="header-left">
-        <a href="index.html" class="logo">
+        <a href="" class="logo">
             <img src="../assets/img/logo.png" alt="Logo">
         </a>
-        <a href="index.html" class="logo logo-small">
+        <a href="" class="logo logo-small">
             <img src="../assets/img/logo-small.png" alt="Logo" width="30" height="30">
         </a>
     </div>
@@ -179,10 +179,8 @@
                     <a href="#"><i class="fas fa-graduation-cap"></i> <span> Students</span> <span
                                 class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="../index.php?action=dashboard/student-list" >Student List</a></li>
-                        <li><a href="student-details.html">Student View</a></li>
-                        <li><a href="add-student.html">Student Add</a></li>
-                        <li><a href="edit-student.html">Student Edit</a></li>
+                        <li><a href="index.php?action=dashboard/student-list" >Student List</a></li>
+                        <li><a href="index.php?action=add-student">Student Add</a></li>
                     </ul>
                 </li>
                 <li class="submenu">

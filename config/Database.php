@@ -26,10 +26,11 @@
             return $this->connect->prepare($sql);
         }
 
+
         //excute a query
-        public function excute()
+        public function execute()
         {
-            return $this->stml->excute();
+            return $this->stml->execute();
         }
 
         public function singleFetch()
